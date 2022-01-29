@@ -1,0 +1,130 @@
+/*
+one, two, three, four, #five, #six, #seven, #eight, nine, ten, eleven, twelve, thirteen,  fourteen, #fifteen,
+#sixteen, seventeen, eighteen, nineteen, twenty, twentyone, #twentytwo, twentythree, twentyfour, twentyfive, #twentysix,
+#twentyseven, twentynine
+*/
+
+/* HEADER */
+.one {
+    margin: 5px;
+    width: 90px;
+}
+.two {
+    margin-left: 10px;
+}
+.three {
+    margin-left: 618px;
+}
+.ten {
+    font-family: 'Roboto Slab', serif;
+}
+
+/* PROFILE */
+.nine {
+    text-decoration: none;
+    color: blue;
+}
+.twentyone {
+    color: black;
+}
+
+/* EDIT PROFILE */
+.eleven {
+    text-align: center;
+    height: 35px;
+    font-size: 20px;
+}
+
+/* BIO */
+.seventeen {
+    font-family: 'Roboto Slab', serif;
+    border: 1px solid black;
+    width: 730px;
+    height: 40px;
+    padding-left: 15px;
+    padding-right: 10px;
+}
+.eighteen {
+    font-family: 'Roboto Slab', serif;
+    border: 1px solid black;
+    width: 480px;
+    height: 40px;
+    padding-left: 15px;
+    padding-right: 10px;
+    margin: 10px;
+    margin-left: 0px;
+}
+.nineteen {
+    display: inline-block;
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    border: 1px solid black;
+    width: 150px;
+    margin-left: 0;
+    margin-right: 62px;
+}
+.twenty {
+    display: inline-block;
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    border: 1px solid black;
+    width: 70px;
+    margin-left: 0px;
+    margin: auto;
+}
+.seventeen:hover, .eighteen:hover, .nineteen:hover, .twenty:hover {
+    border: 1px solid blue;
+}
+
+/* UPDATE BIO ( #five, #six, #twentytwo ) */
+
+#seven, #eight, #twentysix {
+    cursor: pointer;
+}
+.four {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+.twelve {
+    padding-left: 15px;
+    padding-right: 10px;
+    width: 730px;
+    height: 40px;
+}
+.thirteen {
+    padding-left: 15px;
+    padding-right: 10px;
+    width: 480px;
+    height: 40px;
+}
+.fourteen {
+    text-align: center;
+    border: 0px;
+}
+.twentythree {
+    display: inline-block;
+    margin-left: 0;
+    margin-right: 12px;
+    width: 320px;
+}
+.twentyfour {
+    display: inline-block;
+    margin-left: 0;
+    margin-right: auto;
+    width: 150px;
+}
+
+/* CREATE POST ( #five, #six ) */
+
+.twentyfive {
+    text-align: center;
+    width: 730px;
+    height: 40px;
+}
+.twentynine {
+    display: inline-block;
+    margin-left: 0px;
+    width: 730px;
+}
+

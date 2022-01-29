@@ -1,0 +1,5 @@
+{
+    "require": {
+        "benmajor/php-image-resize": "^1.1"
+    }
+}

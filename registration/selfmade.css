@@ -1,0 +1,65 @@
+.one {
+    margin: 5px;
+    width: 90px;
+}
+.two {
+    margin-left: 10px;
+}
+.three {
+    margin-left: 618px;
+}
+#two, #three {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+.six {
+    color:black;
+}
+.seven {
+    display: inline-block;
+    margin-left: 0%;
+    margin-right: auto;
+    width: 45%;
+}
+.eight {
+    display: inline-block;
+    margin-left: 0%;
+    margin-right: auto;
+    width: 50%;
+    border-left: 1px solid black; 
+}
+.nine {
+    text-decoration: none;
+    color: blue;
+}
+.ten {
+    font-family: 'Roboto Slab', serif;
+}
+.eleven {
+    text-align:center;
+    height:35px;
+    font-size:20px;
+}
+.twelve {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 730px;
+    height: 40px;
+}
+.thirteen {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 445px;
+    height: 40px;
+}
+.fourteen {
+    cursor: pointer;
+}
+.sixteen {
+    text-align: center;
+    border: 0px;
+}
+.seventeen {
+    width: 10%;
+}

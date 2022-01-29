@@ -1,0 +1,40 @@
+[
+    {
+        "name": "benmajor/php-image-resize",
+        "version": "1.1.2",
+        "version_normalized": "1.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/benmajor/PHP-Image-Resize.git",
+            "reference": "655a28997f9ee698f2622fe267588528a12e663e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/benmajor/PHP-Image-Resize/zipball/655a28997f9ee698f2622fe267588528a12e663e",
+            "reference": "655a28997f9ee698f2622fe267588528a12e663e",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">= 5.6.0"
+        },
+        "time": "2019-07-03T09:27:51+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "BenMajor\\ImageResize\\": "src/BenMajor/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ben Major",
+                "email": "ben.major88@gmail.com"
+            }
+        ],
+        "description": "A simple PHP class to handle image resizing and editing."
+    }
+]
