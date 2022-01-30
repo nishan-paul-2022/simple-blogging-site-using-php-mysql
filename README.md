@@ -7,4 +7,4 @@ Tech stack that I've used to build this project:
 - PHP 
 - MYSQL 
 
-## MY WEBSITE: [Expresso](https://expresso2022.000webhostapp.com/)
+## Live demo of my website: [EXPRESSO](https://expresso2022.000webhostapp.com/)
