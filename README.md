@@ -10,7 +10,7 @@ Tech stack that I've used to build this project:
 ## Live demo of my website: [EXPRESSO](https://expresso2022.000webhostapp.com/)
 
 ![e01](https://github.com/nishan-paul-2022/simple-blogging-site-using-php-mysql/blob/main/readme/e01.PNG)
-![e02](https://github.com/nishan-paul-2022/simple-blogging-site-using-php-mysql/blob/main/readme/e02.png)
+![e02](https://github.com/nishan-paul-2022/simple-blogging-site-using-php-mysql/blob/main/readme/e02.PNG)
 ![e03](https://github.com/nishan-paul-2022/simple-blogging-site-using-php-mysql/blob/main/readme/e03.PNG)
-![e04](https://github.com/nishan-paul-2022/simple-blogging-site-using-php-mysql/blob/main/readme/e04.png)
-![e05](https://github.com/nishan-paul-2022/simple-blogging-site-using-php-mysql/blob/main/readme/e05.png)
+![e04](https://github.com/nishan-paul-2022/simple-blogging-site-using-php-mysql/blob/main/readme/e04.PNG)
+![e05](https://github.com/nishan-paul-2022/simple-blogging-site-using-php-mysql/blob/main/readme/e05.PNG)
