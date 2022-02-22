@@ -7,7 +7,7 @@
 - PHP 
 - MYSQL 
 
-## UI from my website [expresso](https://expresso2022.000webhostapp.com/) :
+## UI of my website [expresso](https://expresso2022.000webhostapp.com/) :
 
 ![e01](https://github.com/nishan-paul-2022/simple-blogging-site-using-php-mysql/blob/main/readme/e01.PNG)
 ![e02](https://github.com/nishan-paul-2022/simple-blogging-site-using-php-mysql/blob/main/readme/e02.PNG)
