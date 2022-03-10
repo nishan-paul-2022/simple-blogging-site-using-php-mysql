@@ -2,7 +2,7 @@
 	date_default_timezone_set('UTC');
 	
 	session_start();
-	$database = mysqli_connect("localhost", "root", "", "expresso");
+	$database = mysqli_connect("localhost", "root", "", "13_expresso");
 	if( !$database ) {
 		die("Error connecting to database: " . mysqli_connect_error());
 	}
