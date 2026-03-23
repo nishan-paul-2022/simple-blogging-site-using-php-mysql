@@ -1,0 +1,11 @@
+.next
+node_modules
+out
+build
+dist
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+public
