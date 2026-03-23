@@ -1,5 +1,5 @@
 {
-    "name": "laravel/framework",
+    "name": "expresso/blog-api",
     "description": "Modern Blog API",
     "keywords": ["framework", "laravel", "blog", "api"],
     "license": "MIT",

@@ -5,8 +5,12 @@ WORKDIR /app
 # Copy package files
 COPY package.json package-lock.json* ./
 
-# Install dependencies
-RUN npm ci --prefer-offline --no-audit
+# Install dependencies (use npm ci when lockfile exists, fallback otherwise)
+RUN if [ -f package-lock.json ]; then \
+			npm ci --prefer-offline --no-audit; \
+		else \
+			npm install --no-audit; \
+		fi
 
 # Copy application files
 COPY . .
