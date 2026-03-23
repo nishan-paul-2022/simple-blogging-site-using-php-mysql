@@ -1,5 +1,59 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  avatar?: string;
+  bio?: string;
+  is_admin?: boolean;
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  description?: string;
+  color?: string;
+}
+
+export interface Tag {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface Post {
+  id: number;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt?: string;
+  featured_image?: string;
+  status: 'draft' | 'published' | 'archived';
+  views: number;
+  user_id: number;
+  category_id: number;
+  user?: User;
+  category?: Category;
+  tags?: Tag[];
+  comments_count?: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Comment {
+  id: number;
+  post_id: number;
+  user_id: number;
+  parent_id?: number;
+  content: string;
+  approved: boolean;
+  user?: User;
+  replies?: Comment[];
+  created_at: string;
+}
+
 interface ApiResponse<T> {
   data?: T;
   message?: string;
@@ -11,7 +65,7 @@ interface ApiRequestOptions extends RequestInit {
   headers?: Record<string, string>;
 }
 
-export async function apiCall<T = any>(
+export async function apiCall<T>(
   endpoint: string,
   options: ApiRequestOptions = {}
 ): Promise<ApiResponse<T>> {
@@ -52,7 +106,7 @@ export async function apiCall<T = any>(
 }
 
 export async function fetchPosts(page: number = 1) {
-  return apiCall('/posts', {
+  return apiCall<Post[]>('/posts', {
     method: 'GET',
     headers: {
       'X-Page': page.toString(),
@@ -61,52 +115,52 @@ export async function fetchPosts(page: number = 1) {
 }
 
 export async function fetchPost(id: string | number) {
-  return apiCall(`/posts/${id}`, {
+  return apiCall<Post>(`/posts/${id}`, {
     method: 'GET',
   });
 }
 
-export async function createPost(data: any) {
-  return apiCall('/posts', {
+export async function createPost(data: Partial<Post>) {
+  return apiCall<Post>('/posts', {
     method: 'POST',
     body: JSON.stringify(data),
   });
 }
 
-export async function updatePost(id: string | number, data: any) {
-  return apiCall(`/posts/${id}`, {
+export async function updatePost(id: string | number, data: Partial<Post>) {
+  return apiCall<Post>(`/posts/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   });
 }
 
 export async function deletePost(id: string | number) {
-  return apiCall(`/posts/${id}`, {
+  return apiCall<void>(`/posts/${id}`, {
     method: 'DELETE',
   });
 }
 
 export async function fetchCategories() {
-  return apiCall('/categories', {
+  return apiCall<Category[]>('/categories', {
     method: 'GET',
   });
 }
 
 export async function fetchTags() {
-  return apiCall('/tags', {
+  return apiCall<Tag[]>('/tags', {
     method: 'GET',
   });
 }
 
 export async function login(email: string, password: string) {
-  return apiCall('/auth/login', {
+  return apiCall<{ user: User; token: string }>('/auth/login', {
     method: 'POST',
     body: JSON.stringify({ email, password }),
   });
 }
 
-export async function register(data: any) {
-  return apiCall('/auth/register', {
+export async function register(data: Partial<User> & { password?: string }) {
+  return apiCall<{ user: User; token: string }>('/auth/register', {
     method: 'POST',
     body: JSON.stringify(data),
   });

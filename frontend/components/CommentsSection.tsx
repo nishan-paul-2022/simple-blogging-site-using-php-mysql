@@ -1,20 +1,10 @@
 'use client';
 
-import { useEffect, useState, FormEvent } from 'react';
+import { useEffect, useState, FormEvent, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-
-interface Comment {
-  id: number;
-  content: string;
-  approved: boolean;
-  user?: {
-    name: string;
-    avatar?: string;
-  };
-  created_at: string;
-}
+import { Comment } from '@/lib/api';
 
 interface CommentsClientProps {
   postId: number;
@@ -28,13 +18,7 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
   const [commentContent, setCommentContent] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    setIsAuthenticated(!!token);
-    fetchComments();
-  }, [postId]);
-
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postId}/comments`);
 
@@ -44,14 +28,21 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
 
       const data = await res.json();
       // Filter to show only approved comments to non-admins
-      const approvedComments = data.data?.filter((c: Comment) => c.approved) || [];
+      const allComments = data.data || [];
+      const approvedComments = allComments.filter((c: Comment) => c.approved);
       setComments(approvedComments);
-    } catch (err) {
+    } catch {
       setError('Failed to load comments');
     } finally {
       setLoading(false);
     }
-  };
+  }, [postId]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+    fetchComments();
+  }, [postId, fetchComments]);
 
   const handleSubmitComment = async (e: FormEvent) => {
     e.preventDefault();
@@ -70,7 +61,7 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
     setError('');
 
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) {
         window.location.href = '/auth/login';
         return;
@@ -93,8 +84,8 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
 
       setCommentContent('');
       fetchComments();
-    } catch (err: any) {
-      setError(err.message || 'Failed to post comment');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to post comment');
     } finally {
       setSubmitting(false);
     }

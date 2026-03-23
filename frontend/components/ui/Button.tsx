@@ -41,10 +41,11 @@ interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, fullWidth, asChild, ...props }, ref) => {
     if (asChild) {
+      const { ...anchorProps } = props as unknown as React.AnchorHTMLAttributes<HTMLAnchorElement>;
       return (
         <a
           className={clsx(buttonVariants({ variant, size, fullWidth, className }))}
-          {...(props as any)}
+          {...anchorProps}
         />
       );
     }

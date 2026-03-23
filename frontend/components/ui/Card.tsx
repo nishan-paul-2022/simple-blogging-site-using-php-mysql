@@ -3,17 +3,12 @@
 import React from 'react';
 import clsx from 'clsx';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
-
-interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
-
-interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+type CardProps = React.HTMLAttributes<HTMLDivElement>;
+type CardHeaderProps = React.HTMLAttributes<HTMLDivElement>;
+type CardTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
+type CardDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
+type CardContentProps = React.HTMLAttributes<HTMLDivElement>;
+type CardFooterProps = React.HTMLAttributes<HTMLDivElement>;
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(({ className, ...props }, ref) => (
   <div

@@ -64,24 +64,21 @@ export default function SignupForm() {
     setLoading(true);
 
     try {
-      const data = await register(
-        formData.name,
-        formData.email,
-        formData.password,
-        formData.password_confirmation
-      );
+      const response = await register(formData);
 
-      if (data?.token) {
+      if (response.data?.token) {
         // Store token in localStorage
-        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('token', response.data.token);
 
         // Redirect to home
         router.push('/');
       } else {
         setError('Registration failed. Please try again.');
       }
-    } catch (err: any) {
-      setError(err?.message || 'Registration failed. Email may already be in use.');
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : 'Registration failed. Email may already be in use.'
+      );
     } finally {
       setLoading(false);
     }

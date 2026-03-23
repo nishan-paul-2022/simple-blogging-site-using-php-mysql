@@ -1,18 +1,11 @@
 'use client';
 
-import { useEffect, useState, FormEvent } from 'react';
+import { useEffect, useState, FormEvent, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-  description?: string;
-  color?: string;
-}
+import { Category } from '@/lib/api';
 
 export default function AdminCategoriesPage() {
   const router = useRouter();
@@ -26,13 +19,9 @@ export default function AdminCategoriesPage() {
     color: '#6366f1',
   });
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) {
         router.push('/auth/login');
         return;
@@ -50,12 +39,16 @@ export default function AdminCategoriesPage() {
 
       const data = await res.json();
       setCategories(data.data || []);
-    } catch (err) {
+    } catch {
       setError('Failed to load categories');
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -68,7 +61,7 @@ export default function AdminCategoriesPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) return;
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
@@ -88,7 +81,7 @@ export default function AdminCategoriesPage() {
       setCategories([...categories, data.data]);
       setFormData({ name: '', description: '', color: '#6366f1' });
       setShowForm(false);
-    } catch (err) {
+    } catch {
       setError('Failed to create category');
     }
   };
@@ -99,7 +92,7 @@ export default function AdminCategoriesPage() {
     }
 
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) return;
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories/${id}`, {
@@ -114,7 +107,7 @@ export default function AdminCategoriesPage() {
       } else {
         setError('Failed to delete category');
       }
-    } catch (err) {
+    } catch {
       setError('Error deleting category');
     }
   };

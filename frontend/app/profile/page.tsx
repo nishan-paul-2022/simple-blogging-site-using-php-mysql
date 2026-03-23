@@ -29,7 +29,7 @@ export default function ProfilePage() {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('token');
     if (!token) {
       router.push('/auth/login');
       return;
@@ -58,7 +58,7 @@ export default function ProfilePage() {
         name: data.data.name,
         bio: data.data.bio || '',
       });
-    } catch (err) {
+    } catch {
       setError('Unable to load profile');
     } finally {
       setLoading(false);
@@ -75,7 +75,7 @@ export default function ProfilePage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('token');
     if (!token) return;
 
     try {
@@ -95,13 +95,13 @@ export default function ProfilePage() {
       const data = await res.json();
       setUser(data.data);
       setEditing(false);
-    } catch (err) {
+    } catch {
       setError('Failed to update profile');
     }
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('token');
     router.push('/');
   };
 
@@ -245,7 +245,7 @@ export default function ProfilePage() {
 
           <Card.Content className="space-y-4">
             <p className="text-sm text-gray-700">
-              Logging out will clear your session. You'll need to sign in again to access your
+              Logging out will clear your session. You&apos;ll need to sign in again to access your
               account.
             </p>
             <Button

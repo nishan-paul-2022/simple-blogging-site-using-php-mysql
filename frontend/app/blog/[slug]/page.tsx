@@ -1,26 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
+import Image from 'next/image';
 import CommentsSection from '@/components/CommentsSection';
-
-interface Post {
-  id: number;
-  slug: string;
-  title: string;
-  content: string;
-  excerpt: string;
-  featured_image?: string;
-  category?: { name: string; slug: string };
-  user?: { name: string };
-  tags?: Array<{ name: string; slug: string }>;
-  published_at?: string;
-  views?: number;
-  comments?: any[];
-}
+import { Post } from '@/lib/api';
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const [post, setPost] = useState<Post | null>(null);
@@ -28,11 +15,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const [error, setError] = useState<string | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<Post[]>([]);
 
-  useEffect(() => {
-    fetchPost();
-  }, [params.slug]);
-
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -61,7 +44,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.slug]);
+
+  useEffect(() => {
+    fetchPost();
+  }, [fetchPost]);
 
   if (loading) {
     return (
@@ -84,8 +71,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     );
   }
 
-  const formattedDate = post.published_at
-    ? new Date(post.published_at).toLocaleDateString('en-US', {
+  const formattedDate = post.created_at
+    ? new Date(post.created_at).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -130,12 +117,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="mb-8 rounded-lg overflow-hidden shadow-lg h-96 bg-slate-200"
+            className="mb-8 rounded-lg overflow-hidden shadow-lg h-96 bg-slate-200 relative"
           >
-            <img
+            <Image
               src={post.featured_image}
               alt={post.title}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </motion.div>
         )}

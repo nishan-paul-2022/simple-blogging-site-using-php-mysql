@@ -36,7 +36,7 @@ export default function CreatePostPage() {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('token');
     if (!token) {
       router.push('/auth/login');
       return;
@@ -47,7 +47,7 @@ export default function CreatePostPage() {
 
   const fetchCategories = async () => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) return;
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
@@ -62,7 +62,7 @@ export default function CreatePostPage() {
 
       const data = await res.json();
       setCategories(data.data || []);
-    } catch (err) {
+    } catch {
       setError('Failed to load categories');
     } finally {
       setLoading(false);
@@ -91,7 +91,7 @@ export default function CreatePostPage() {
         return;
       }
 
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) {
         router.push('/auth/login');
         return;
@@ -112,8 +112,8 @@ export default function CreatePostPage() {
 
       const data = await res.json();
       router.push(`/blog/${data.data.slug}`);
-    } catch (err: any) {
-      setError(err.message || 'Failed to create post');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to create post');
     } finally {
       setSubmitting(false);
     }

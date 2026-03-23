@@ -1,23 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-
-interface Post {
-  id: number;
-  title: string;
-  slug: string;
-  status: string;
-  views: number;
-  created_at: string;
-  author?: {
-    name: string;
-  };
-}
+import { Post } from '@/lib/api';
 
 export default function AdminPostsPage() {
   const router = useRouter();
@@ -26,13 +15,9 @@ export default function AdminPostsPage() {
   const [error, setError] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
 
-  useEffect(() => {
-    fetchPosts();
-  }, [statusFilter]);
-
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) {
         router.push('/auth/login');
         return;
@@ -56,12 +41,16 @@ export default function AdminPostsPage() {
 
       const data = await res.json();
       setPosts(data.data || []);
-    } catch (err) {
+    } catch {
       setError('Failed to load posts');
     } finally {
       setLoading(false);
     }
-  };
+  }, [router, statusFilter]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
 
   const handleDelete = async (id: number) => {
     if (!window.confirm('Are you sure you want to delete this post?')) {
@@ -69,7 +58,7 @@ export default function AdminPostsPage() {
     }
 
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) return;
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${id}`, {
@@ -84,7 +73,7 @@ export default function AdminPostsPage() {
       } else {
         setError('Failed to delete post');
       }
-    } catch (err) {
+    } catch {
       setError('Error deleting post');
     }
   };

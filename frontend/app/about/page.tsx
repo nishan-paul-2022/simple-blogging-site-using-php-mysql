@@ -139,7 +139,7 @@ export default function AboutPage() {
             <div className="bg-slate-50 p-4 rounded border-l-4 border-purple-600">
               <p className="text-sm text-slate-700">
                 <strong>Current Status:</strong> Phase 4 - Frontend implementation in progress. The
-                foundation is solid, and we're actively building out user-facing features.
+                foundation is solid, and we&apos;re actively building out user-facing features.
               </p>
             </div>
           </div>

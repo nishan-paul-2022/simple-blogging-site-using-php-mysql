@@ -28,7 +28,7 @@ export default function AdminDashboard() {
 
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) return;
 
       // Due to API limitations, we'll fetch from individual endpoints
@@ -54,7 +54,7 @@ export default function AdminDashboard() {
         totalComments: 100, // Placeholder - would need stats endpoint
         totalCategories: categoriesData.data?.length || 0,
       });
-    } catch (err) {
+    } catch {
       setError('Failed to load statistics');
     } finally {
       setLoading(false);
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
       {/* Page Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-2">Dashboard</h1>
-        <p className="text-gray-600">Welcome back! Here's an overview of your blog.</p>
+        <p className="text-gray-600">Welcome back! Here&apos;s an overview of your blog.</p>
       </div>
 
       {error && (

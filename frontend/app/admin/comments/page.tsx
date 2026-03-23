@@ -1,24 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-
-interface Comment {
-  id: number;
-  content: string;
-  approved: boolean;
-  post?: {
-    id: number;
-    title: string;
-  };
-  user?: {
-    name: string;
-  };
-  created_at: string;
-}
+import { Comment } from '@/lib/api';
 
 export default function AdminCommentsPage() {
   const router = useRouter();
@@ -27,13 +14,9 @@ export default function AdminCommentsPage() {
   const [error, setError] = useState('');
   const [filter, setFilter] = useState<'all' | 'pending' | 'approved'>('all');
 
-  useEffect(() => {
-    fetchComments();
-  }, [filter]);
-
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) {
         router.push('/auth/login');
         return;
@@ -62,16 +45,20 @@ export default function AdminCommentsPage() {
       }
 
       setComments(filtered);
-    } catch (err) {
+    } catch {
       setError('Failed to load comments');
     } finally {
       setLoading(false);
     }
-  };
+  }, [router, filter]);
+
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
 
   const handleApprove = async (id: number) => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) return;
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/approve`, {
@@ -86,7 +73,7 @@ export default function AdminCommentsPage() {
       } else {
         setError('Failed to approve comment');
       }
-    } catch (err) {
+    } catch {
       setError('Error approving comment');
     }
   };
@@ -97,7 +84,7 @@ export default function AdminCommentsPage() {
     }
 
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (!token) return;
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/comments/${id}`, {
@@ -112,7 +99,7 @@ export default function AdminCommentsPage() {
       } else {
         setError('Failed to delete comment');
       }
-    } catch (err) {
+    } catch {
       setError('Error deleting comment');
     }
   };
@@ -185,9 +172,10 @@ export default function AdminCommentsPage() {
                         {comment.user?.name || 'Anonymous'}
                       </Card.Title>
                       <Card.Description>
-                        {comment.post?.title && (
+                        {/* Note: post.title is conditional as it might not be in the Comment object */}
+                        {comment.post_id && (
                           <>
-                            On: <strong>{comment.post.title}</strong>
+                            On Post ID: <strong>{comment.post_id}</strong>
                           </>
                         )}
                       </Card.Description>

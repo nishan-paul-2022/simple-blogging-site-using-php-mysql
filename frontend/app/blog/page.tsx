@@ -1,23 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { BlogCard } from '@/components/BlogCard';
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
-
-interface Post {
-  id: number;
-  slug: string;
-  title: string;
-  excerpt: string;
-  featured_image?: string;
-  category?: { name: string; slug: string };
-  user?: { name: string };
-  tags?: Array<{ name: string; slug: string }>;
-  published_at?: string;
-  views?: number;
-}
+import { Post } from '@/lib/api';
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -27,11 +15,7 @@ export default function BlogPage() {
   const [hasMore, setHasMore] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    fetchPosts();
-  }, [page, searchTerm]);
-
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -65,7 +49,11 @@ export default function BlogPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, searchTerm]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -126,7 +114,17 @@ export default function BlogPage() {
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <BlogCard {...post} />
+                  <BlogCard
+                    title={post.title}
+                    excerpt={post.excerpt || ''}
+                    slug={post.slug}
+                    featuredImage={post.featured_image}
+                    category={post.category}
+                    author={post.user}
+                    tags={post.tags}
+                    publishedAt={post.created_at}
+                    views={post.views}
+                  />
                 </motion.div>
               ))}
             </motion.div>

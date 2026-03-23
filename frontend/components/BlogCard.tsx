@@ -3,16 +3,18 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image';
 import { Badge } from './ui/Badge';
+import { Category, Tag } from '@/lib/api';
 
 interface BlogCardProps {
   title: string;
   excerpt: string;
   slug: string;
   featuredImage?: string;
-  category?: { name: string; slug: string };
+  category?: Category;
   author?: { name: string };
-  tags?: Array<{ name: string; slug: string }>;
+  tags?: Tag[];
   publishedAt?: string;
   views?: number;
 }
@@ -48,13 +50,15 @@ export function BlogCard({
           {/* Featured Image */}
           {featuredImage && (
             <div className="relative h-48 overflow-hidden bg-slate-100">
-              <img
+              <Image
                 src={featuredImage}
                 alt={title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
               {category && (
-                <div className="absolute top-3 left-3">
+                <div className="absolute top-3 left-3 z-10">
                   <Badge variant="primary">{category.name}</Badge>
                 </div>
               )}

@@ -30,19 +30,19 @@ export default function LoginForm() {
         return;
       }
 
-      const data = await login(email, password);
+      const response = await login(email, password);
 
-      if (data?.token) {
+      if (response.data?.token) {
         // Store token in localStorage
-        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('token', response.data.token);
 
         // Redirect to home
         router.push('/');
       } else {
         setError('Login failed. Please try again.');
       }
-    } catch (err: any) {
-      setError(err?.message || 'Invalid email or password. Please try again.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Invalid email or password. Please try again.');
     } finally {
       setLoading(false);
     }
