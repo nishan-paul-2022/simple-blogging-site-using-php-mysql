@@ -147,7 +147,21 @@ git clone <repository-url>
 cd simple-blogging-site-using-php-mysql
 ```
 
-### 2. Start with Docker
+### 2. One-Command Setup (Recommended)
+
+```bash
+bash install.sh
+```
+
+This single command will:
+- Build Docker images
+- Start MySQL, Redis, backend, frontend, and Nginx
+- Create missing environment files
+- Install backend dependencies
+- Generate Laravel app key
+- Run migrations and seeders
+
+### 3. Manual Docker Setup (Alternative)
 
 ```bash
 # Start all services
@@ -162,13 +176,13 @@ docker-compose exec app-backend php artisan migrate --seed
 # Database is now populated with test data
 ```
 
-### 3. Access Application
+### 4. Access Application
 
 - **Frontend**: http://localhost:3000
 - **API**: http://localhost:8000/api
 - **API Docs**: http://localhost:8000/api/docs (when available)
 
-### 4. View Test Data
+### 5. View Test Data
 
 **Default Admin Account**:
 ```
@@ -183,7 +197,7 @@ Password: password
 - 50+ posts with various statuses
 - 100+ comments with nested replies
 
-### 5. Stop Services
+### 6. Stop Services
 
 ```bash
 docker-compose down
