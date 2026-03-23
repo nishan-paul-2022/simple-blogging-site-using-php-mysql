@@ -1,0 +1,115 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  database:
+    image: mysql:8.0
+    container_name: blog-database
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: blog_db
+      MYSQL_USER: blog_user
+      MYSQL_PASSWORD: blog_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - blog-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Redis Cache
+  cache:
+    image: redis:7-alpine
+    container_name: blog-cache
+    ports:
+      - "6379:6379"
+    networks:
+      - blog-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      timeout: 5s
+      retries: 5
+
+  # Laravel Backend API
+  app-backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: blog-backend
+    ports:
+      - "8000:8000"
+    environment:
+      APP_NAME: BlogAPI
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: mysql
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_DATABASE: blog_db
+      DB_USERNAME: blog_user
+      DB_PASSWORD: blog_password
+      CACHE_DRIVER: redis
+      REDIS_HOST: cache
+      REDIS_PORT: 6379
+      SESSION_DRIVER: cookie
+    volumes:
+      - ./api:/var/www/api
+      - ./api/storage:/var/www/api/storage
+    depends_on:
+      database:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    networks:
+      - blog-network
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+  # Next.js Frontend
+  app-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: blog-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000/api
+      NODE_ENV: development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - app-backend
+    networks:
+      - blog-network
+    command: npm run dev
+
+  # Nginx Web Server
+  web-server:
+    image: nginx:alpine
+    container_name: blog-webserver
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - app-backend
+      - app-frontend
+    networks:
+      - blog-network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  blog-network:
+    driver: bridge

@@ -1,1 +1,41 @@
-.vscode
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.next/
+out/
+dist/
+build/
+
+# PHP/Composer
+vendor/
+composer.lock
+*.pem
+
+# Laravel
+bootstrap/cache/
+storage/
+*.log
+.phpunit.result.cache
+
+# Docker
+docker-compose.override.yml
+mysql_data/
