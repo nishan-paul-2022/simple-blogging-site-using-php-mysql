@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 export interface AuthUser {
   id: number;
@@ -21,18 +21,14 @@ export interface UseAuthReturn {
 
 export function useAuth(): UseAuthReturn {
   const [user, setUser] = useState<AuthUser | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  // Load auth from localStorage on mount
-  useEffect(() => {
-    const storedToken = localStorage.getItem('authToken');
-    if (storedToken) {
-      setToken(storedToken);
-      // Optionally fetch user data from /auth/me endpoint
+  const [token, setToken] = useState<string | null>(() => {
+    if (typeof window === 'undefined') {
+      return null;
     }
-    setLoading(false);
-  }, []);
+
+    return localStorage.getItem('authToken');
+  });
+  const loading = false;
 
   const logout = useCallback(() => {
     localStorage.removeItem('authToken');

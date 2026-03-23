@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from './ui/Button';
@@ -9,14 +9,14 @@ import { Button } from './ui/Button';
 export function Header() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
 
-  // Check authentication status on mount
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    setIsAuthenticated(!!token);
-  }, []);
+    return !!localStorage.getItem('authToken');
+  });
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');

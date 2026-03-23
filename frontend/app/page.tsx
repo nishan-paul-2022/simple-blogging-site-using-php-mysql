@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Hero } from '@/components/Hero';
 import { Button } from '@/components/ui/Button';
@@ -163,7 +164,7 @@ export default function Home() {
             community.
           </p>
           <Button size="lg" asChild>
-            <a href="/blog">Start Reading</a>
+            <Link href="/blog">Start Reading</Link>
           </Button>
         </div>
       </section>

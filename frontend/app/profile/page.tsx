@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -260,9 +261,9 @@ export default function ProfilePage() {
 
         {/* Back Button */}
         <div className="mt-6 text-center">
-          <a href="/" className="text-indigo-600 hover:text-indigo-700 transition">
+          <Link href="/" className="text-indigo-600 hover:text-indigo-700 transition">
             ← Back to home
-          </a>
+          </Link>
         </div>
       </motion.div>
     </main>
