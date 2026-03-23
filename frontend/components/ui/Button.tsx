@@ -34,20 +34,19 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, fullWidth, asChild, ...props }, ref) => {
-    if (asChild) {
-      const { ...anchorProps } = props as unknown as React.AnchorHTMLAttributes<HTMLAnchorElement>;
-      return (
-        <a
-          className={clsx(buttonVariants({ variant, size, fullWidth, className }))}
-          {...anchorProps}
-        />
-      );
+  ({ className, variant, size, fullWidth, asChild = false, children, ...props }, ref) => {
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(children as React.ReactElement, {
+        ...props,
+        className: clsx(buttonVariants({ variant, size, fullWidth, className }), (children.props as any).className),
+        ref: ref,
+      } as any);
     }
 
     return (
@@ -55,7 +54,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={clsx(buttonVariants({ variant, size, fullWidth, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+      </button>
     );
   }
 );
