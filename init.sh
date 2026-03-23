@@ -19,6 +19,18 @@ print_err() {
     echo -e "${RED}[error]${NC} $1"
 }
 
+upsert_env() {
+    local file="$1"
+    local key="$2"
+    local value="$3"
+
+    if grep -qE "^${key}=" "$file"; then
+        sed -i "s|^${key}=.*|${key}=${value}|" "$file"
+    else
+        echo "${key}=${value}" >> "$file"
+    fi
+}
+
 if ! command -v docker >/dev/null 2>&1; then
     print_err "Docker is not installed. Install Docker first."
     exit 1
@@ -51,12 +63,34 @@ else
     print_ok "api/.env already exists"
 fi
 
+upsert_env api/.env APP_NAME '"Blog API"'
+upsert_env api/.env APP_ENV local
+upsert_env api/.env APP_DEBUG true
+upsert_env api/.env APP_URL http://localhost:8000
+upsert_env api/.env DB_CONNECTION mysql
+upsert_env api/.env DB_HOST database
+upsert_env api/.env DB_PORT 3306
+upsert_env api/.env DB_DATABASE blog_db
+upsert_env api/.env DB_USERNAME blog_user
+upsert_env api/.env DB_PASSWORD blog_password
+upsert_env api/.env CACHE_DRIVER redis
+upsert_env api/.env REDIS_HOST cache
+upsert_env api/.env REDIS_PORT 6379
+upsert_env api/.env SESSION_DRIVER cookie
+upsert_env api/.env SANCTUM_STATEFUL_DOMAINS 'localhost,localhost:3000,127.0.0.1'
+upsert_env api/.env VITE_API_BASE_URL http://localhost:8000/api
+print_ok "api/.env values are set for Docker runtime"
+
 if [ ! -f frontend/.env.local ]; then
     cp frontend/.env.example frontend/.env.local
     print_ok "Created frontend/.env.local"
 else
     print_ok "frontend/.env.local already exists"
 fi
+
+upsert_env frontend/.env.local NEXT_PUBLIC_API_URL http://localhost:8000/api
+upsert_env frontend/.env.local NEXT_PUBLIC_APP_NAME '"Modern Blog Platform"'
+print_ok "frontend/.env.local values are set"
 
 mkdir -p ssl
 print_ok "Ensured ssl directory exists"

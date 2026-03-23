@@ -157,6 +157,7 @@ This single command will:
 - Build Docker images
 - Start MySQL, Redis, backend, frontend, and Nginx
 - Create missing environment files
+- Set actual Docker-ready values in `api/.env` and `frontend/.env.local`
 - Install backend dependencies
 - Generate Laravel app key
 - Run migrations and seeders
