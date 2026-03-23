@@ -5,10 +5,15 @@ A comprehensive, full-featured blogging platform built with modern web technolog
 ## 🎯 Project Overview
 
 Expresso is a migration of a legacy PHP/MySQL blog into a production-ready application using:
-- **Backend**: Laravel 11 REST API with PostgreSQL/MySQL
+- **Backend**: Laravel 11 REST API with MySQL
 - **Frontend**: Next.js 14 with React 18 and TypeScript
 - **Infrastructure**: Docker containerization with Nginx reverse proxy
 - **Styling**: Tailwind CSS with custom design system
+
+### Repository Layout Note
+
+- Active runtime code lives in `api`, `frontend`, and root infrastructure files.
+- The original PHP/Bootstrap implementation has been archived in `legacy-php-app` for reference only.
 
 **Live Demo**: [coming soon]  
 **Documentation**: See sections below for comprehensive guides
@@ -717,7 +722,7 @@ heroku login
 heroku create expresso-blog
 
 # Add database
-heroku addons:create heroku-postgresql:standard-0
+heroku addons:create cleardb:ignite
 
 # Deploy
 git push heroku main
