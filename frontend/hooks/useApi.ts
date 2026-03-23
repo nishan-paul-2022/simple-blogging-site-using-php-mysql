@@ -30,9 +30,9 @@ export function useApi<T = any>(apiCall: (...args: any[]) => Promise<T>) {
 }
 
 export function useApiWithQuery(
-  queryKey: string[],
+  _queryKey: string[],
   queryFn: () => Promise<any>,
-  options: any = {}
+  _options: any = {}
 ) {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);

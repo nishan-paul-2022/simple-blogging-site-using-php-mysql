@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import React from 'react';
 import Image from 'next/image';
 import { Badge } from './ui/Badge';
 import { Category, Tag } from '@/lib/api';
