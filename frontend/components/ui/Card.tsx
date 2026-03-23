@@ -10,7 +10,7 @@ type CardDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
 type CardContentProps = React.HTMLAttributes<HTMLDivElement>;
 type CardFooterProps = React.HTMLAttributes<HTMLDivElement>;
 
-const Card = React.forwardRef<HTMLDivElement, CardProps>(({ className, ...props }, ref) => (
+const CardRoot = React.forwardRef<HTMLDivElement, CardProps>(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={clsx(
@@ -20,7 +20,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(({ className, ...props 
     {...props}
   />
 ));
-Card.displayName = 'Card';
+CardRoot.displayName = 'Card';
 
 const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className, ...props }, ref) => (
@@ -60,5 +60,23 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
   )
 );
 CardFooter.displayName = 'CardFooter';
+
+type CardComponent = React.ForwardRefExoticComponent<
+  CardProps & React.RefAttributes<HTMLDivElement>
+> & {
+  Header: typeof CardHeader;
+  Title: typeof CardTitle;
+  Description: typeof CardDescription;
+  Content: typeof CardContent;
+  Footer: typeof CardFooter;
+};
+
+const Card = Object.assign(CardRoot, {
+  Header: CardHeader,
+  Title: CardTitle,
+  Description: CardDescription,
+  Content: CardContent,
+  Footer: CardFooter,
+}) as CardComponent;
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
