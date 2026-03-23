@@ -25,7 +25,12 @@ export default function SignupForm() {
   };
 
   const validateForm = () => {
-    if (!formData.name || !formData.email || !formData.password || !formData.password_confirmation) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.password ||
+      !formData.password_confirmation
+    ) {
       setError('Please fill in all fields');
       return false;
     }
@@ -138,7 +143,10 @@ export default function SignupForm() {
 
       {/* Password Confirmation Field */}
       <div>
-        <label htmlFor="password_confirmation" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="password_confirmation"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Confirm Password
         </label>
         <input

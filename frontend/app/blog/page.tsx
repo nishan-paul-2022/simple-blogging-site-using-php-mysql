@@ -45,19 +45,18 @@ export default function BlogPage() {
         params.append('search', searchTerm);
       }
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/posts?${params}`,
-        { method: 'GET' }
-      );
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts?${params}`, {
+        method: 'GET',
+      });
 
       if (!response.ok) throw new Error('Failed to fetch posts');
 
       const data = await response.json();
-      
+
       if (page === 1) {
         setPosts(data.data);
       } else {
-        setPosts(prev => [...prev, ...data.data]);
+        setPosts((prev) => [...prev, ...data.data]);
       }
 
       setHasMore(data.pagination.current_page < data.pagination.last_page);
@@ -139,11 +138,7 @@ export default function BlogPage() {
                 whileInView={{ opacity: 1 }}
                 className="flex justify-center"
               >
-                <Button
-                  onClick={() => setPage(p => p + 1)}
-                  disabled={loading}
-                  variant="outline"
-                >
+                <Button onClick={() => setPage((p) => p + 1)} disabled={loading} variant="outline">
                   {loading ? 'Loading...' : 'Load More'}
                 </Button>
               </motion.div>

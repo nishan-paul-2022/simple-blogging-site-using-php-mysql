@@ -77,9 +77,7 @@ export function BlogCard({
                     {tag.name}
                   </Badge>
                 ))}
-                {tags.length > 2 && (
-                  <Badge variant="secondary">+{tags.length - 2}</Badge>
-                )}
+                {tags.length > 2 && <Badge variant="secondary">+{tags.length - 2}</Badge>}
               </div>
             )}
 
@@ -90,11 +88,7 @@ export function BlogCard({
                 {formattedDate && <span>•</span>}
                 {formattedDate && <span>{formattedDate}</span>}
               </div>
-              {views !== undefined && (
-                <span className="flex items-center gap-1">
-                  👁️ {views}
-                </span>
-              )}
+              {views !== undefined && <span className="flex items-center gap-1">👁️ {views}</span>}
             </div>
           </div>
         </article>

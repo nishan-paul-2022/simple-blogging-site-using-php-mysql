@@ -52,7 +52,7 @@ export default function CreatePostPage() {
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -69,7 +69,9 @@ export default function CreatePostPage() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -98,7 +100,7 @@ export default function CreatePostPage() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
@@ -140,18 +142,14 @@ export default function CreatePostPage() {
         <Card className="shadow-lg">
           <Card.Header>
             <Card.Title>Post Content</Card.Title>
-            <Card.Description>
-              Fill in the details below to create your post
-            </Card.Description>
+            <Card.Description>Fill in the details below to create your post</Card.Description>
           </Card.Header>
 
           <Card.Content>
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Title */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Title *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Title *</label>
                 <input
                   type="text"
                   name="title"
@@ -166,9 +164,7 @@ export default function CreatePostPage() {
 
               {/* Category */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Category *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Category *</label>
                 <select
                   name="category_id"
                   value={formData.category_id}
@@ -188,9 +184,7 @@ export default function CreatePostPage() {
 
               {/* Excerpt */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Excerpt *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Excerpt *</label>
                 <textarea
                   name="excerpt"
                   value={formData.excerpt}
@@ -205,9 +199,7 @@ export default function CreatePostPage() {
 
               {/* Content */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Content *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Content *</label>
                 <textarea
                   name="content"
                   value={formData.content}
@@ -218,9 +210,7 @@ export default function CreatePostPage() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 font-mono text-sm"
                   placeholder="Write your post content (HTML supported)..."
                 />
-                <p className="text-xs text-gray-500 mt-2">
-                  HTML tags are supported for formatting
-                </p>
+                <p className="text-xs text-gray-500 mt-2">HTML tags are supported for formatting</p>
               </div>
 
               {/* Featured Image */}
@@ -241,9 +231,7 @@ export default function CreatePostPage() {
 
               {/* Status */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Status
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
                 <div className="flex gap-4">
                   <label className="flex items-center gap-2">
                     <input
@@ -272,12 +260,7 @@ export default function CreatePostPage() {
 
               {/* Action Buttons */}
               <div className="flex gap-4 pt-6">
-                <Button
-                  type="submit"
-                  variant="primary"
-                  disabled={submitting}
-                  className="flex-1"
-                >
+                <Button type="submit" variant="primary" disabled={submitting} className="flex-1">
                   {submitting ? 'Creating...' : 'Create Post'}
                 </Button>
                 <Button

@@ -15,18 +15,16 @@ interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={clsx(
-        'rounded-lg border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-200',
-        className
-      )}
-      {...props}
-    />
-  )
-);
+const Card = React.forwardRef<HTMLDivElement, CardProps>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={clsx(
+      'rounded-lg border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-200',
+      className
+    )}
+    {...props}
+  />
+));
 Card.displayName = 'Card';
 
 const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
@@ -63,11 +61,7 @@ CardContent.displayName = 'CardContent';
 
 const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
   ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={clsx('flex items-center p-6 pt-0', className)}
-      {...props}
-    />
+    <div ref={ref} className={clsx('flex items-center p-6 pt-0', className)} {...props} />
   )
 );
 CardFooter.displayName = 'CardFooter';

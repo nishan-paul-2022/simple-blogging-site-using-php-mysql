@@ -74,7 +74,7 @@ export default function AdminCategoriesPage() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
@@ -181,9 +181,7 @@ export default function AdminCategoriesPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Color
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Color</label>
                   <input
                     type="color"
                     name="color"
@@ -216,11 +214,7 @@ export default function AdminCategoriesPage() {
           <Card>
             <Card.Content className="py-12 text-center">
               <p className="text-gray-500">No categories yet</p>
-              <Button
-                variant="primary"
-                onClick={() => setShowForm(true)}
-                className="mt-4"
-              >
+              <Button variant="primary" onClick={() => setShowForm(true)} className="mt-4">
                 Create First Category
               </Button>
             </Card.Content>
@@ -228,11 +222,7 @@ export default function AdminCategoriesPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category) => (
-              <motion.div
-                key={category.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
+              <motion.div key={category.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 <Card>
                   <Card.Header className="pb-3">
                     <div className="flex items-start justify-between">
@@ -249,9 +239,7 @@ export default function AdminCategoriesPage() {
                   </Card.Header>
                   {category.description && (
                     <Card.Content>
-                      <p className="text-sm text-gray-600 mb-4">
-                        {category.description}
-                      </p>
+                      <p className="text-sm text-gray-600 mb-4">{category.description}</p>
                     </Card.Content>
                   )}
                   <Card.Footer className="flex gap-2">

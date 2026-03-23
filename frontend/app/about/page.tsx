@@ -45,19 +45,35 @@ export default function AboutPage() {
               <div>
                 <h3 className="text-xl font-semibold mb-3 text-purple-600">Frontend</h3>
                 <ul className="space-y-2 text-slate-700">
-                  <li>• <strong>Next.js 14</strong> - React framework for production</li>
-                  <li>• <strong>TypeScript</strong> - Type-safe development</li>
-                  <li>• <strong>Tailwind CSS</strong> - Utility-first styling</li>
-                  <li>• <strong>Framer Motion</strong> - Smooth animations</li>
+                  <li>
+                    • <strong>Next.js 14</strong> - React framework for production
+                  </li>
+                  <li>
+                    • <strong>TypeScript</strong> - Type-safe development
+                  </li>
+                  <li>
+                    • <strong>Tailwind CSS</strong> - Utility-first styling
+                  </li>
+                  <li>
+                    • <strong>Framer Motion</strong> - Smooth animations
+                  </li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold mb-3 text-emerald-600">Backend</h3>
                 <ul className="space-y-2 text-slate-700">
-                  <li>• <strong>Laravel 11</strong> - PHP web framework</li>
-                  <li>• <strong>MySQL 8</strong> - Relational database</li>
-                  <li>• <strong>Redis</strong> - Caching layer</li>
-                  <li>• <strong>Sanctum</strong> - API authentication</li>
+                  <li>
+                    • <strong>Laravel 11</strong> - PHP web framework
+                  </li>
+                  <li>
+                    • <strong>MySQL 8</strong> - Relational database
+                  </li>
+                  <li>
+                    • <strong>Redis</strong> - Caching layer
+                  </li>
+                  <li>
+                    • <strong>Sanctum</strong> - API authentication
+                  </li>
                 </ul>
               </div>
             </div>
@@ -117,13 +133,13 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold mb-4">Development Approach</h2>
             <p className="text-slate-700 mb-4">
               This project follows a modern development workflow with clear phases, comprehensive
-              testing, and continuous deployment strategies. Each feature is developed modularly
-              and integrated smoothly with the rest of the system.
+              testing, and continuous deployment strategies. Each feature is developed modularly and
+              integrated smoothly with the rest of the system.
             </p>
             <div className="bg-slate-50 p-4 rounded border-l-4 border-purple-600">
               <p className="text-sm text-slate-700">
-                <strong>Current Status:</strong> Phase 4 - Frontend implementation in progress.
-                The foundation is solid, and we're actively building out user-facing features.
+                <strong>Current Status:</strong> Phase 4 - Frontend implementation in progress. The
+                foundation is solid, and we're actively building out user-facing features.
               </p>
             </div>
           </div>

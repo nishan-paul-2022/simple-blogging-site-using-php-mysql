@@ -9,7 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: 'bg-gradient-to-r from-purple-600 to-emerald-600 text-white hover:shadow-lg hover:shadow-purple-500/30',
+        primary:
+          'bg-gradient-to-r from-purple-600 to-emerald-600 text-white hover:shadow-lg hover:shadow-purple-500/30',
         secondary: 'bg-slate-100 text-slate-900 hover:bg-slate-200',
         outline: 'border-2 border-purple-600 text-purple-600 hover:bg-purple-50',
         ghost: 'text-slate-600 hover:bg-slate-100',
@@ -33,8 +34,7 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
@@ -62,4 +62,3 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = 'Button';
 
 export { Button, buttonVariants };
-

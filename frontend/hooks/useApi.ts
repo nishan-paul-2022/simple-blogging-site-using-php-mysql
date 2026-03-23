@@ -2,9 +2,7 @@
 
 import { useState, useCallback } from 'react';
 
-export function useApi<T = any>(
-  apiCall: (...args: any[]) => Promise<T>
-) {
+export function useApi<T = any>(apiCall: (...args: any[]) => Promise<T>) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);

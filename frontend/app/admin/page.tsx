@@ -116,12 +116,12 @@ export default function AdminDashboard() {
             transition={{ delay: idx * 0.1 }}
           >
             <Link href={card.href}>
-              <div className={`bg-gradient-to-br ${card.color} rounded-xl p-6 text-white shadow-lg hover:shadow-xl transition-shadow cursor-pointer`}>
+              <div
+                className={`bg-gradient-to-br ${card.color} rounded-xl p-6 text-white shadow-lg hover:shadow-xl transition-shadow cursor-pointer`}
+              >
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-4xl">{card.icon}</span>
-                  <span className="text-3xl font-bold">
-                    {loading ? '-' : card.value}
-                  </span>
+                  <span className="text-3xl font-bold">{loading ? '-' : card.value}</span>
                 </div>
                 <p className="text-white/80">{card.label}</p>
               </div>
@@ -210,8 +210,15 @@ export default function AdminDashboard() {
       >
         <h3 className="font-semibold text-blue-900 mb-2">Need Help?</h3>
         <p className="text-blue-800 text-sm">
-          Check out the <a href="#" className="underline hover:text-blue-900">documentation</a> or{' '}
-          <a href="mailto:support@expresso.com" className="underline hover:text-blue-900">contact support</a>.
+          Check out the{' '}
+          <a href="#" className="underline hover:text-blue-900">
+            documentation
+          </a>{' '}
+          or{' '}
+          <a href="mailto:support@expresso.com" className="underline hover:text-blue-900">
+            contact support
+          </a>
+          .
         </p>
       </motion.div>
     </div>

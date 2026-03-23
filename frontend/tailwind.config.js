@@ -55,11 +55,11 @@ module.exports = {
         },
       },
       boxShadow: {
-        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-        'neon': '0 0 20px rgba(139, 92, 246, 0.3)',
+        glass: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+        neon: '0 0 20px rgba(139, 92, 246, 0.3)',
       },
       backdropBlur: {
-        'glass': '4px',
+        glass: '4px',
       },
     },
   },

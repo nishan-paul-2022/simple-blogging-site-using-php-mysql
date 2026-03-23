@@ -36,9 +36,7 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
 
   const fetchComments = async () => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/posts/${postId}/comments`
-      );
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postId}/comments`);
 
       if (!res.ok) {
         throw new Error('Failed to fetch comments');
@@ -46,9 +44,7 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
 
       const data = await res.json();
       // Filter to show only approved comments to non-admins
-      const approvedComments = data.data?.filter(
-        (c: Comment) => c.approved
-      ) || [];
+      const approvedComments = data.data?.filter((c: Comment) => c.approved) || [];
       setComments(approvedComments);
     } catch (err) {
       setError('Failed to load comments');
@@ -80,19 +76,16 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
         return;
       }
 
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/posts/${postId}/comments`,
-        {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            content: commentContent,
-          }),
-        }
-      );
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postId}/comments`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          content: commentContent,
+        }),
+      });
 
       if (!res.ok) {
         throw new Error('Failed to post comment');
@@ -120,17 +113,11 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
 
       {/* Comment Form */}
       {isAuthenticated ? (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <Card>
             <Card.Header>
               <Card.Title>Leave a Comment</Card.Title>
-              <Card.Description>
-                Share your thoughts on this post
-              </Card.Description>
+              <Card.Description>Share your thoughts on this post</Card.Description>
             </Card.Header>
             <Card.Content>
               <form onSubmit={handleSubmitComment} className="space-y-4">
@@ -147,9 +134,7 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
                   variant="primary"
                   disabled={submitting || !commentContent.trim()}
                   className={
-                    submitting || !commentContent.trim()
-                      ? 'opacity-50 cursor-not-allowed'
-                      : ''
+                    submitting || !commentContent.trim() ? 'opacity-50 cursor-not-allowed' : ''
                   }
                 >
                   {submitting ? 'Posting...' : 'Post Comment'}
@@ -164,9 +149,7 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8 p-6 bg-blue-50 border border-blue-200 rounded-lg text-center"
         >
-          <p className="text-blue-900 mb-4">
-            Sign in to leave a comment
-          </p>
+          <p className="text-blue-900 mb-4">Sign in to leave a comment</p>
           <Button asChild>
             <a href="/auth/login">Sign In</a>
           </Button>
@@ -186,9 +169,7 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
           </div>
         ) : comments.length === 0 ? (
           <div className="text-center py-8">
-            <p className="text-gray-500">
-              No comments yet. Be the first to comment!
-            </p>
+            <p className="text-gray-500">No comments yet. Be the first to comment!</p>
           </div>
         ) : (
           comments.map((comment, idx) => (
@@ -209,8 +190,7 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
                         {comment.user?.name || 'Anonymous'}
                       </Card.Title>
                       <Card.Description>
-                        {new Date(comment.created_at).toLocaleDateString()}
-                        {' '}
+                        {new Date(comment.created_at).toLocaleDateString()}{' '}
                         {new Date(comment.created_at).toLocaleTimeString([], {
                           hour: '2-digit',
                           minute: '2-digit',

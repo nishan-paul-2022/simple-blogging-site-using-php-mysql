@@ -19,7 +19,7 @@ export async function apiCall<T = any>(
 
   const defaultHeaders: Record<string, string> = {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    Accept: 'application/json',
   };
 
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;

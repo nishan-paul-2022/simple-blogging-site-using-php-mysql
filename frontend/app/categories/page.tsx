@@ -25,10 +25,9 @@ export default function CategoriesPage() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/categories`,
-        { method: 'GET' }
-      );
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
+        method: 'GET',
+      });
 
       if (!response.ok) throw new Error('Failed to fetch categories');
 
@@ -55,9 +54,7 @@ export default function CategoriesPage() {
               Categories
             </span>
           </h1>
-          <p className="text-lg text-slate-600">
-            Browse posts by category
-          </p>
+          <p className="text-lg text-slate-600">Browse posts by category</p>
         </motion.div>
 
         {/* Error State */}
@@ -93,14 +90,10 @@ export default function CategoriesPage() {
                   >
                     <h3 className="text-xl font-bold mb-2">{category.name}</h3>
                     {category.description && (
-                      <p className="text-slate-600 mb-4 line-clamp-2">
-                        {category.description}
-                      </p>
+                      <p className="text-slate-600 mb-4 line-clamp-2">{category.description}</p>
                     )}
                     <div className="flex items-center justify-between">
-                      <Badge variant="secondary">
-                        {category.posts_count} posts
-                      </Badge>
+                      <Badge variant="secondary">{category.posts_count} posts</Badge>
                       <span className="text-slate-400 text-sm">→</span>
                     </div>
                   </div>

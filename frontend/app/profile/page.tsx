@@ -43,7 +43,7 @@ export default function ProfilePage() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
@@ -82,7 +82,7 @@ export default function ProfilePage() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/profile`, {
         method: 'PUT',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
@@ -130,9 +130,7 @@ export default function ProfilePage() {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">Profile</h1>
-          <p className="text-gray-600">
-            Manage your account information and settings
-          </p>
+          <p className="text-gray-600">Manage your account information and settings</p>
         </div>
 
         {error && (
@@ -164,9 +162,7 @@ export default function ProfilePage() {
 
             {/* Email (read-only) */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
               <input
                 type="email"
                 value={user?.email || ''}
@@ -177,9 +173,7 @@ export default function ProfilePage() {
 
             {/* Member Since */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Member Since
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Member Since</label>
               <p className="text-gray-700">
                 {user?.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}
               </p>
@@ -190,9 +184,7 @@ export default function ProfilePage() {
               <>
                 {/* Name Field */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
                   <input
                     type="text"
                     name="name"
@@ -204,9 +196,7 @@ export default function ProfilePage() {
 
                 {/* Bio Field */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Bio
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Bio</label>
                   <textarea
                     name="bio"
                     value={formData.bio}
@@ -219,18 +209,10 @@ export default function ProfilePage() {
 
                 {/* Action Buttons */}
                 <div className="flex gap-3">
-                  <Button
-                    variant="primary"
-                    onClick={handleSubmit}
-                    className="flex-1"
-                  >
+                  <Button variant="primary" onClick={handleSubmit} className="flex-1">
                     Save Changes
                   </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={() => setEditing(false)}
-                    className="flex-1"
-                  >
+                  <Button variant="secondary" onClick={() => setEditing(false)} className="flex-1">
                     Cancel
                   </Button>
                 </div>
@@ -240,19 +222,13 @@ export default function ProfilePage() {
                 {/* Bio Display */}
                 {user?.bio && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Bio
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Bio</label>
                     <p className="text-gray-700">{user.bio}</p>
                   </div>
                 )}
 
                 {/* Edit Button */}
-                <Button
-                  variant="outline"
-                  onClick={() => setEditing(true)}
-                  className="w-full"
-                >
+                <Button variant="outline" onClick={() => setEditing(true)} className="w-full">
                   Edit Profile
                 </Button>
               </>
@@ -264,14 +240,13 @@ export default function ProfilePage() {
         <Card className="border-red-200 bg-red-50">
           <Card.Header>
             <Card.Title className="text-red-700">Danger Zone</Card.Title>
-            <Card.Description>
-              Irreversible actions
-            </Card.Description>
+            <Card.Description>Irreversible actions</Card.Description>
           </Card.Header>
 
           <Card.Content className="space-y-4">
             <p className="text-sm text-gray-700">
-              Logging out will clear your session. You'll need to sign in again to access your account.
+              Logging out will clear your session. You'll need to sign in again to access your
+              account.
             </p>
             <Button
               variant="ghost"

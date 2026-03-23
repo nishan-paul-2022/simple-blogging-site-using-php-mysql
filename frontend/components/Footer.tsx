@@ -88,26 +88,17 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Connect</h4>
             <ul className="space-y-2 text-sm text-slate-400">
               <li>
-                <a
-                  href="#"
-                  className="hover:text-slate-100 transition-colors"
-                >
+                <a href="#" className="hover:text-slate-100 transition-colors">
                   GitHub
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="hover:text-slate-100 transition-colors"
-                >
+                <a href="#" className="hover:text-slate-100 transition-colors">
                   Twitter
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="hover:text-slate-100 transition-colors"
-                >
+                <a href="#" className="hover:text-slate-100 transition-colors">
                   LinkedIn
                 </a>
               </li>

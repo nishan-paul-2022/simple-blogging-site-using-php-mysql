@@ -47,7 +47,7 @@ export default function Home() {
       <section className="py-16 bg-white">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl font-bold mb-12 text-center">System Status</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Frontend Status */}
             <div className="p-8 rounded-lg border-2 border-emerald-200 bg-emerald-50">
@@ -64,9 +64,11 @@ export default function Home() {
             </div>
 
             {/* Backend Status */}
-            <div className={`p-8 rounded-lg border-2 ${
-              error ? 'border-red-200 bg-red-50' : 'border-emerald-200 bg-emerald-50'
-            }`}>
+            <div
+              className={`p-8 rounded-lg border-2 ${
+                error ? 'border-red-200 bg-red-50' : 'border-emerald-200 bg-emerald-50'
+              }`}
+            >
               <div className="flex items-start">
                 <div className="text-4xl mr-4">⚙️</div>
                 <div>
@@ -103,19 +105,25 @@ export default function Home() {
             <div className="p-6 bg-white rounded-lg border border-slate-200 text-center">
               <div className="text-4xl mb-4">📚</div>
               <h3 className="text-lg font-bold mb-3">Rich Blog Content</h3>
-              <p className="text-slate-600">Browse through beautifully formatted blog posts with images, tags, and categories.</p>
+              <p className="text-slate-600">
+                Browse through beautifully formatted blog posts with images, tags, and categories.
+              </p>
             </div>
 
             <div className="p-6 bg-white rounded-lg border border-slate-200 text-center">
               <div className="text-4xl mb-4">💬</div>
               <h3 className="text-lg font-bold mb-3">Community Comments</h3>
-              <p className="text-slate-600">Engage with readers and build a community through nested comment threads.</p>
+              <p className="text-slate-600">
+                Engage with readers and build a community through nested comment threads.
+              </p>
             </div>
 
             <div className="p-6 bg-white rounded-lg border border-slate-200 text-center">
               <div className="text-4xl mb-4">🚀</div>
               <h3 className="text-lg font-bold mb-3">High Performance</h3>
-              <p className="text-slate-600">Built on modern technologies for fast loading and smooth user experience.</p>
+              <p className="text-slate-600">
+                Built on modern technologies for fast loading and smooth user experience.
+              </p>
             </div>
           </div>
         </div>
@@ -128,11 +136,11 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { phase: 1, title: "Infrastructure", status: "✓ Complete" },
-              { phase: 2, title: "Database & API", status: "✓ Complete" },
-              { phase: 3, title: "Frontend Foundation", status: "⏳ In Progress" },
-              { phase: 4, title: "Features & Integration", status: "◆ Next" },
-              { phase: 5, title: "Polish & Deploy", status: "◆ Coming" },
+              { phase: 1, title: 'Infrastructure', status: '✓ Complete' },
+              { phase: 2, title: 'Database & API', status: '✓ Complete' },
+              { phase: 3, title: 'Frontend Foundation', status: '⏳ In Progress' },
+              { phase: 4, title: 'Features & Integration', status: '◆ Next' },
+              { phase: 5, title: 'Polish & Deploy', status: '◆ Coming' },
             ].map((item) => (
               <div key={item.phase} className="flex items-center gap-4">
                 <div className="text-2xl font-bold">{item.phase}</div>
@@ -151,7 +159,8 @@ export default function Home() {
         <div className="mx-auto max-w-2xl px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Explore?</h2>
           <p className="text-lg text-slate-600 mb-8">
-            Discover amazing blog posts, connect with authors, and share your thoughts with the community.
+            Discover amazing blog posts, connect with authors, and share your thoughts with the
+            community.
           </p>
           <Button size="lg" asChild>
             <a href="/blog">Start Reading</a>

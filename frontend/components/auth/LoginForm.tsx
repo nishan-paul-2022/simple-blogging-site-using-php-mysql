@@ -42,9 +42,7 @@ export default function LoginForm() {
         setError('Login failed. Please try again.');
       }
     } catch (err: any) {
-      setError(
-        err?.message || 'Invalid email or password. Please try again.'
-      );
+      setError(err?.message || 'Invalid email or password. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -112,8 +110,12 @@ export default function LoginForm() {
       {/* Test Credentials */}
       <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-gray-700">
         <p className="font-semibold mb-1">Test Credentials:</p>
-        <p>Email: <code className="bg-white px-1 py-0.5 rounded">admin@blog.test</code></p>
-        <p>Password: <code className="bg-white px-1 py-0.5 rounded">password</code></p>
+        <p>
+          Email: <code className="bg-white px-1 py-0.5 rounded">admin@blog.test</code>
+        </p>
+        <p>
+          Password: <code className="bg-white px-1 py-0.5 rounded">password</code>
+        </p>
       </div>
     </form>
   );

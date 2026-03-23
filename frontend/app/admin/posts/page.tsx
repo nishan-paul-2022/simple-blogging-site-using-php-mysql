@@ -218,11 +218,7 @@ export default function AdminPostsPage() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex gap-2">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            asChild
-                          >
+                          <Button size="sm" variant="outline" asChild>
                             <Link href={`#edit-${post.id}`}>Edit</Link>
                           </Button>
                           <Button

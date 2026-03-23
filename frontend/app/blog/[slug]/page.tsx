@@ -22,11 +22,7 @@ interface Post {
   comments?: any[];
 }
 
-export default function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,10 +37,9 @@ export default function BlogPostPage({
       setLoading(true);
       setError(null);
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/posts/${params.slug}`,
-        { method: 'GET' }
-      );
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${params.slug}`, {
+        method: 'GET',
+      });
 
       if (!response.ok) throw new Error('Post not found');
 
@@ -80,9 +75,7 @@ export default function BlogPostPage({
     return (
       <main className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-slate-900 mb-4">
-            {error || 'Post not found'}
-          </h1>
+          <h1 className="text-2xl font-bold text-slate-900 mb-4">{error || 'Post not found'}</h1>
           <Button asChild>
             <Link href="/blog">Back to Blog</Link>
           </Button>
@@ -103,20 +96,12 @@ export default function BlogPostPage({
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 py-12">
       <article className="mx-auto max-w-4xl px-4">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex items-center gap-2 mb-4">
-            {post.category && (
-              <Badge variant="primary">{post.category.name}</Badge>
-            )}
+            {post.category && <Badge variant="primary">{post.category.name}</Badge>}
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            {post.title}
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">{post.title}</h1>
 
           <div className="flex flex-wrap items-center gap-4 text-slate-600 mb-6">
             {post.user && (
@@ -187,11 +172,7 @@ export default function BlogPostPage({
 
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="mb-12"
-          >
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mb-12">
             <h2 className="text-3xl font-bold mb-6">Related Posts</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedPosts.map((relatedPost) => (
@@ -210,11 +191,7 @@ export default function BlogPostPage({
         {post.id && <CommentsSection postId={post.id} />}
 
         {/* Back Button */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="mt-8"
-        >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mt-8">
           <Button variant="secondary" asChild>
             <Link href="/blog">← Back to Blog</Link>
           </Button>

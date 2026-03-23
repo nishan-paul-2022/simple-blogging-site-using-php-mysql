@@ -42,7 +42,7 @@ export default function AdminCommentsPage() {
       // Note: API may not have separate comments endpoint, this would need to be implemented
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/comments?per_page=50`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -77,16 +77,12 @@ export default function AdminCommentsPage() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/approve`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       if (res.ok) {
-        setComments(
-          comments.map((c) =>
-            c.id === id ? { ...c, approved: true } : c
-          )
-        );
+        setComments(comments.map((c) => (c.id === id ? { ...c, approved: true } : c)));
       } else {
         setError('Failed to approve comment');
       }
@@ -174,19 +170,13 @@ export default function AdminCommentsPage() {
           <Card>
             <Card.Content className="py-12 text-center">
               <p className="text-gray-500">
-                {filter === 'pending'
-                  ? 'No pending comments'
-                  : 'No comments found'}
+                {filter === 'pending' ? 'No pending comments' : 'No comments found'}
               </p>
             </Card.Content>
           </Card>
         ) : (
           comments.map((comment) => (
-            <motion.div
-              key={comment.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            >
+            <motion.div key={comment.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <Card>
                 <Card.Header>
                   <div className="flex items-start justify-between">
