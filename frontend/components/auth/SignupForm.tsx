@@ -66,9 +66,10 @@ export default function SignupForm() {
     try {
       const response = await register(formData);
 
-      if (response.data?.token) {
+      if (response.access_token) {
         // Store token in localStorage
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token', response.access_token);
+        localStorage.setItem('authToken', response.access_token);
 
         // Redirect to home
         router.push('/');

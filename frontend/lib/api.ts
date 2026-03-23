@@ -56,6 +56,7 @@ export interface Comment {
 
 interface ApiResponse<T> {
   data?: T;
+  access_token?: string;
   message?: string;
   errors?: Record<string, string[]>;
   status?: string;
@@ -76,7 +77,10 @@ export async function apiCall<T>(
     Accept: 'application/json',
   };
 
-  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  const token =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('token') || localStorage.getItem('authToken')
+      : null;
   if (token) {
     defaultHeaders['Authorization'] = `Bearer ${token}`;
   }
@@ -153,14 +157,14 @@ export async function fetchTags() {
 }
 
 export async function login(email: string, password: string) {
-  return apiCall<{ user: User; token: string }>('/auth/login', {
+  return apiCall<User>('/auth/login', {
     method: 'POST',
     body: JSON.stringify({ email, password }),
   });
 }
 
 export async function register(data: Partial<User> & { password?: string }) {
-  return apiCall<{ user: User; token: string }>('/auth/register', {
+  return apiCall<User>('/auth/register', {
     method: 'POST',
     body: JSON.stringify(data),
   });
@@ -169,5 +173,6 @@ export async function register(data: Partial<User> & { password?: string }) {
 export async function logout() {
   if (typeof window !== 'undefined') {
     localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
   }
 }
