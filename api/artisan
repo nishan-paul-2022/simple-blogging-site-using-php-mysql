@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+define('LARAVEL_START', microtime(true));
+
+// Register the Composer autoloader...
+$autoloader = require __DIR__ . '/vendor/autoload.php';
+
+require_once __DIR__ . '/app/Console/Kernel.php';
+
+// Bootstrap Laravel and handle the command...
+$app = require_once __DIR__ . '/bootstrap/app.php';
+
+exit($kernel = $app->make(\Illuminate\Contracts\Console\Kernel::class)->handle($app));
