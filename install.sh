@@ -92,9 +92,6 @@ upsert_env frontend/.env.local NEXT_PUBLIC_API_URL http://localhost:8000/api
 upsert_env frontend/.env.local NEXT_PUBLIC_APP_NAME '"Modern Blog Platform"'
 print_ok "frontend/.env.local values are set"
 
-mkdir -p ssl
-print_ok "Ensured ssl directory exists"
-
 print_step "Building images"
 $COMPOSE_CMD build
 print_ok "Images built"
