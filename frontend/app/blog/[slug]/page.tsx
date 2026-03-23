@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
+import CommentsSection from '@/components/CommentsSection';
 
 interface Post {
   id: number;
@@ -205,10 +206,14 @@ export default function BlogPostPage({
           </motion.div>
         )}
 
+        {/* Comments Section */}
+        {post.id && <CommentsSection postId={post.id} />}
+
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          className="mt-8"
         >
           <Button variant="secondary" asChild>
             <Link href="/blog">← Back to Blog</Link>
