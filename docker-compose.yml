@@ -14,10 +14,12 @@ services:
       - mysql_data:/var/lib/mysql
     networks:
       - blog-network
+    restart: unless-stopped
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
       timeout: 20s
       retries: 10
+      start_period: 30s
 
   # Redis Cache
   cache:
@@ -27,10 +29,12 @@ services:
       - "6379:6379"
     networks:
       - blog-network
+    restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       timeout: 5s
       retries: 5
+      start_period: 10s
 
   # Laravel Backend API
   app-backend:
@@ -56,8 +60,10 @@ services:
       REDIS_PORT: 6379
       SESSION_DRIVER: cookie
     volumes:
+      # Use an anonymous volume for vendor to preserve what was built in the image
       - ./api:/var/www/api
-      - ./api/storage:/var/www/api/storage
+      - /var/www/api/vendor
+      - /var/www/api/bootstrap/cache
     depends_on:
       database:
         condition: service_healthy
@@ -65,7 +71,11 @@ services:
         condition: service_healthy
     networks:
       - blog-network
-    command: php artisan serve --host=0.0.0.0 --port=8000
+    restart: unless-stopped
+    command: >
+      sh -c "php artisan migrate --force &&
+             php artisan storage:link --force &&
+             php artisan serve --host=0.0.0.0 --port=8000"
 
   # Next.js Frontend
   app-frontend:
@@ -78,6 +88,7 @@ services:
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:8000/api
       NODE_ENV: development
+      WATCHPACK_POLLING: "true"
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -86,23 +97,23 @@ services:
       - app-backend
     networks:
       - blog-network
+    restart: unless-stopped
     command: npm run dev
 
-  # Nginx Web Server
+  # Nginx Web Server (HTTP only)
   web-server:
     image: nginx:alpine
     container_name: blog-webserver
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./ssl:/etc/nginx/ssl:ro
     depends_on:
       - app-backend
       - app-frontend
     networks:
       - blog-network
+    restart: unless-stopped
 
 volumes:
   mysql_data:
