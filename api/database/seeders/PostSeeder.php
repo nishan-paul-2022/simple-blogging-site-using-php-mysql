@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Post;
-use App\Models\User;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
@@ -21,6 +21,7 @@ class PostSeeder extends Seeder
 
         if ($users->isEmpty()) {
             $this->command->info('No users found. Skipping post seeding.');
+
             return;
         }
 

@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\TagController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/health', function () {
@@ -15,7 +15,7 @@ Route::get('/', function () {
     return response()->json([
         'name' => 'Blog API',
         'version' => '1.0.0',
-        'status' => 'active'
+        'status' => 'active',
     ]);
 });
 
@@ -52,7 +52,7 @@ Route::group(['prefix' => 'posts/{post}/comments'], function () {
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
-    
+
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/me', [AuthController::class, 'me']);
         Route::put('/profile', [AuthController::class, 'updateProfile']);
@@ -88,4 +88,3 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/admin/comments/{comment}/approve', [CommentController::class, 'approve']);
     });
 });
-

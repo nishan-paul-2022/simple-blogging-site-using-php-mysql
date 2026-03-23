@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'bio' => fake()->paragraph(),
-            'avatar' => 'https://api.dicebear.com/7.x/avataaars/svg?seed=' . fake()->uuid(),
+            'avatar' => 'https://api.dicebear.com/7.x/avataaars/svg?seed='.fake()->uuid(),
             'is_admin' => false,
         ];
     }

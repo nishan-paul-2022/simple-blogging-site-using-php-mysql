@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Http\Middleware\TrustProxies;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,16 +17,16 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'admin' => \App\Http\Middleware\IsAdmin::class,
+            'admin' => IsAdmin::class,
         ]);
 
         $middleware->api(prepend: [
-            \Illuminate\Http\Middleware\TrustProxies::class,
+            TrustProxies::class,
         ]);
 
         $middleware->web(append: [
-            \App\Http\Middleware\VerifyCsrfToken::class,
-            \Illuminate\Http\Middleware\AddQueuedCookiesToResponse::class,
+            VerifyCsrfToken::class,
+            AddQueuedCookiesToResponse::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

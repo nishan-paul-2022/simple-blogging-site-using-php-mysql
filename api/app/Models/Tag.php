@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Tag extends Model
 {
@@ -22,8 +23,8 @@ class Tag extends Model
         parent::boot();
 
         static::creating(function ($tag) {
-            if (!$tag->slug) {
-                $tag->slug = \Illuminate\Support\Str::slug($tag->name);
+            if (! $tag->slug) {
+                $tag->slug = Str::slug($tag->name);
             }
         });
     }

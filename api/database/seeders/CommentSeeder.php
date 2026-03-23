@@ -19,6 +19,7 @@ class CommentSeeder extends Seeder
 
         if ($posts->isEmpty()) {
             $this->command->info('No published posts found. Skipping comment seeding.');
+
             return;
         }
 

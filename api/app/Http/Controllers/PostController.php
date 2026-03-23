@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -35,7 +35,7 @@ class PostController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%$search%")
-                  ->orWhere('content', 'like', "%$search%");
+                    ->orWhere('content', 'like', "%$search%");
             });
         }
 
@@ -147,7 +147,7 @@ class PostController extends Controller
             'featured_image' => 'nullable|url',
         ]);
 
-        if (isset($validated['status']) && $validated['status'] === 'published' && !$post->published_at) {
+        if (isset($validated['status']) && $validated['status'] === 'published' && ! $post->published_at) {
             $validated['published_at'] = now();
         }
 
