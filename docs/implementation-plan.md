@@ -40,7 +40,7 @@ This plan outlines the migration of the existing Simple Blogging Site (PHP/MySQL
 
 ### Phase 1: Infrastructure & Project Initialization
 **Prompt 1: Project Setup & Dockerization**
-> Initialize a Laravel backend (`api`) and a Next.js frontend (`frontend`) in separate directories. Create a `docker-compose.yml` file to orchestrate these services along with MySQL and Nginx. Ensure both services can communicate. Set up a basic README with setup instructions.
+> Initialize a Laravel backend (`app-backend`) and a Next.js frontend (`app-frontend`) in separate directories. Create a `docker-compose.yml` file to orchestrate these services along with MySQL and Nginx. Ensure both services can communicate. Set up a basic README with setup instructions.
 
 ### Phase 2: Database & Backend Core
 **Prompt 2: Backend Migration & Authentication**

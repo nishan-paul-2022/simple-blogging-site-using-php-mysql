@@ -12,7 +12,7 @@ Expresso is a migration of a legacy PHP/MySQL blog into a production-ready appli
 
 ### Repository Layout Note
 
-- Active runtime code lives in `api`, `frontend`, and root infrastructure files.
+- Active runtime code lives in `app-backend`, `app-frontend`, and root infrastructure files.
 - The original PHP/Bootstrap implementation has been archived in `legacy-php-app` for reference only.
 
 **Live Demo**: [coming soon]  
@@ -85,7 +85,7 @@ Expresso is a migration of a legacy PHP/MySQL blog into a production-ready appli
 
 ## 🛠️ Tech Stack
 
-### Backend (api/)
+### Backend (app-backend/)
 
 | Technology | Version | Purpose |
 |-----------|---------|---------|
@@ -102,7 +102,7 @@ Expresso is a migration of a legacy PHP/MySQL blog into a production-ready appli
 - `laravel/tinker`: Interactive shell
 - Built-in migrations, seeders, factories
 
-### Frontend (frontend/)
+### Frontend (app-frontend/)
 
 | Technology | Version | Purpose |
 |-----------|---------|---------|
@@ -157,7 +157,7 @@ This single command will:
 - Build Docker images
 - Start MySQL, Redis, backend, frontend, and Nginx
 - Create missing environment files
-- Set actual Docker-ready values in `api/.env` and `frontend/.env.local`
+- Set actual Docker-ready values in `app-backend/.env` and `app-frontend/.env.local`
 - Install backend dependencies
 - Generate Laravel app key
 - Run migrations and seeders
@@ -214,7 +214,7 @@ docker-compose down -v
 ### Local Backend Development
 
 ```bash
-cd api
+cd app-backend
 
 # Install dependencies
 composer install
@@ -237,7 +237,7 @@ php artisan serve
 ### Local Frontend Development
 
 ```bash
-cd frontend
+cd app-frontend
 
 # Install dependencies
 npm install
@@ -289,7 +289,7 @@ docker-compose exec app-backend php artisan tinker
 ### Backend Structure
 
 ```
-api/
+app-backend/
 ├── app/
 │   ├── Http/
 │   │   ├── Controllers/
@@ -336,7 +336,7 @@ api/
 ### Frontend Structure
 
 ```
-frontend/
+app-frontend/
 ├── app/
 │   ├── layout.tsx                         # Root layout with Header/Footer
 │   ├── page.tsx                           # Home page (/)
@@ -386,8 +386,8 @@ frontend/
 ```
 ├── docker-compose.yml                     # Service orchestration
 ├── nginx.conf                             # Reverse proxy config
-├── Dockerfile (backend)                   # PHP-FPM container
-├── Dockerfile (frontend)                  # Node.js container
+├── Dockerfile (app-backend)               # PHP-FPM container
+├── Dockerfile (app-frontend)              # Node.js container
 └── .dockerignore                          # Docker ignore file
 ```
 
@@ -687,7 +687,7 @@ docker-compose logs -f app-frontend
 
 ### Environment Variables
 
-**Backend** (api/.env):
+**Backend** (app-backend/.env):
 ```
 APP_NAME=Expresso
 APP_ENV=production
@@ -709,7 +709,7 @@ SANCTUM_STATEFUL_DOMAINS=domain.com,www.domain.com
 SESSION_DOMAIN=.domain.com
 ```
 
-**Frontend** (frontend/.env.local):
+**Frontend** (app-frontend/.env.local):
 ```
 NEXT_PUBLIC_API_URL=https://api.domain.com/api
 ```

@@ -39,7 +39,7 @@ services:
   # Laravel Backend API
   app-backend:
     build:
-      context: ./api
+      context: ./app-backend
       dockerfile: Dockerfile
     container_name: blog-backend
     ports:
@@ -61,9 +61,9 @@ services:
       SESSION_DRIVER: cookie
     volumes:
       # Use an anonymous volume for vendor to preserve what was built in the image
-      - ./api:/var/www/api
-      - /var/www/api/vendor
-      - /var/www/api/bootstrap/cache
+      - ./app-backend:/var/www/app-backend
+      - /var/www/app-backend/vendor
+      - /var/www/app-backend/bootstrap/cache
     depends_on:
       database:
         condition: service_healthy
@@ -80,7 +80,7 @@ services:
   # Next.js Frontend
   app-frontend:
     build:
-      context: ./frontend
+      context: ./app-frontend
       dockerfile: Dockerfile
     container_name: blog-frontend
     ports:
@@ -90,7 +90,7 @@ services:
       NODE_ENV: development
       WATCHPACK_POLLING: "true"
     volumes:
-      - ./frontend:/app
+      - ./app-frontend:/app
       - /app/node_modules
       - /app/.next
     depends_on:

@@ -56,41 +56,41 @@ ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT_DIR"
 
 print_step "Preparing environment files"
-if [ ! -f api/.env ]; then
-	cp api/.env.example api/.env
-	print_ok "Created api/.env"
+if [ ! -f app-backend/.env ]; then
+	cp app-backend/.env.example app-backend/.env
+	print_ok "Created app-backend/.env"
 else
-	print_ok "api/.env already exists"
+	print_ok "app-backend/.env already exists"
 fi
 
-upsert_env api/.env APP_NAME '"Blog API"'
-upsert_env api/.env APP_ENV local
-upsert_env api/.env APP_DEBUG true
-upsert_env api/.env APP_URL http://localhost:8000
-upsert_env api/.env DB_CONNECTION mysql
-upsert_env api/.env DB_HOST database
-upsert_env api/.env DB_PORT 3306
-upsert_env api/.env DB_DATABASE blog_db
-upsert_env api/.env DB_USERNAME blog_user
-upsert_env api/.env DB_PASSWORD blog_password
-upsert_env api/.env CACHE_DRIVER redis
-upsert_env api/.env REDIS_HOST cache
-upsert_env api/.env REDIS_PORT 6379
-upsert_env api/.env SESSION_DRIVER cookie
-upsert_env api/.env SANCTUM_STATEFUL_DOMAINS 'localhost,localhost:3000,127.0.0.1'
-upsert_env api/.env VITE_API_BASE_URL http://localhost:8000/api
-print_ok "api/.env values are set for Docker runtime"
+upsert_env app-backend/.env APP_NAME '"Blog API"'
+upsert_env app-backend/.env APP_ENV local
+upsert_env app-backend/.env APP_DEBUG true
+upsert_env app-backend/.env APP_URL http://localhost:8000
+upsert_env app-backend/.env DB_CONNECTION mysql
+upsert_env app-backend/.env DB_HOST database
+upsert_env app-backend/.env DB_PORT 3306
+upsert_env app-backend/.env DB_DATABASE blog_db
+upsert_env app-backend/.env DB_USERNAME blog_user
+upsert_env app-backend/.env DB_PASSWORD blog_password
+upsert_env app-backend/.env CACHE_DRIVER redis
+upsert_env app-backend/.env REDIS_HOST cache
+upsert_env app-backend/.env REDIS_PORT 6379
+upsert_env app-backend/.env SESSION_DRIVER cookie
+upsert_env app-backend/.env SANCTUM_STATEFUL_DOMAINS 'localhost,localhost:3000,127.0.0.1'
+upsert_env app-backend/.env VITE_API_BASE_URL http://localhost:8000/api
+print_ok "app-backend/.env values are set for Docker runtime"
 
-if [ ! -f frontend/.env.local ]; then
-	cp frontend/.env.example frontend/.env.local
-	print_ok "Created frontend/.env.local"
+if [ ! -f app-frontend/.env.local ]; then
+	cp app-frontend/.env.example app-frontend/.env.local
+	print_ok "Created app-frontend/.env.local"
 else
-	print_ok "frontend/.env.local already exists"
+	print_ok "app-frontend/.env.local already exists"
 fi
 
-upsert_env frontend/.env.local NEXT_PUBLIC_API_URL http://localhost:8000/api
-upsert_env frontend/.env.local NEXT_PUBLIC_APP_NAME '"Modern Blog Platform"'
-print_ok "frontend/.env.local values are set"
+upsert_env app-frontend/.env.local NEXT_PUBLIC_API_URL http://localhost:8000/api
+upsert_env app-frontend/.env.local NEXT_PUBLIC_APP_NAME '"Modern Blog Platform"'
+print_ok "app-frontend/.env.local values are set"
 
 print_step "Building images"
 $COMPOSE_CMD build

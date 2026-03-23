@@ -2,8 +2,8 @@
 .env
 .env.local
 .env.*.local
-api/.env
-frontend/.env.local
+app-backend/.env
+app-frontend/.env.local
 
 # IDE
 .vscode/
