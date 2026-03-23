@@ -2,8 +2,8 @@
 
 import { useEffect, useState, FormEvent, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
+import { Button, buttonVariants } from '@/components/ui/Button';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card';
 import { Comment } from '@/lib/api';
 
 interface CommentsClientProps {
@@ -106,11 +106,11 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
       {isAuthenticated ? (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <Card>
-            <Card.Header>
-              <Card.Title>Leave a Comment</Card.Title>
-              <Card.Description>Share your thoughts on this post</Card.Description>
-            </Card.Header>
-            <Card.Content>
+            <CardHeader>
+              <CardTitle>Leave a Comment</CardTitle>
+              <CardDescription>Share your thoughts on this post</CardDescription>
+            </CardHeader>
+            <CardContent>
               <form onSubmit={handleSubmitComment} className="space-y-4">
                 <textarea
                   value={commentContent}
@@ -131,7 +131,7 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
                   {submitting ? 'Posting...' : 'Post Comment'}
                 </Button>
               </form>
-            </Card.Content>
+            </CardContent>
           </Card>
         </motion.div>
       ) : (
@@ -141,9 +141,9 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
           className="mb-8 p-6 bg-blue-50 border border-blue-200 rounded-lg text-center"
         >
           <p className="text-blue-900 mb-4">Sign in to leave a comment</p>
-          <Button asChild>
-            <a href="/auth/login">Sign In</a>
-          </Button>
+          <a href="/auth/login" className={buttonVariants({ variant: 'primary' })}>
+            Sign In
+          </a>
         </motion.div>
       )}
 
@@ -171,29 +171,29 @@ export default function CommentsSection({ postId }: CommentsClientProps) {
               transition={{ delay: idx * 0.05 }}
             >
               <Card>
-                <Card.Header>
+                <CardHeader>
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-emerald-500 flex items-center justify-center text-white text-sm font-bold">
                       {comment.user?.name?.charAt(0) || 'A'}
                     </div>
                     <div className="flex-1">
-                      <Card.Title className="text-base">
+                      <CardTitle className="text-base">
                         {comment.user?.name || 'Anonymous'}
-                      </Card.Title>
-                      <Card.Description>
+                      </CardTitle>
+                      <CardDescription>
                         {new Date(comment.created_at).toLocaleDateString()}{' '}
                         {new Date(comment.created_at).toLocaleTimeString([], {
                           hour: '2-digit',
                           minute: '2-digit',
                         })}
-                      </Card.Description>
+                      </CardDescription>
                     </div>
                   </div>
-                </Card.Header>
+                </CardHeader>
 
-                <Card.Content>
+                <CardContent>
                   <p className="text-gray-700">{comment.content}</p>
-                </Card.Content>
+                </CardContent>
               </Card>
             </motion.div>
           ))

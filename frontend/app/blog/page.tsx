@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { BlogCard } from '@/components/BlogCard';
-import { Button } from '@/components/ui/Button';
+import { Button, buttonVariants } from '@/components/ui/Button';
 import Link from 'next/link';
 import { Post } from '@/lib/api';
 
@@ -153,9 +153,9 @@ export default function BlogPage() {
             className="text-center py-20"
           >
             <p className="text-xl text-slate-600 mb-6">No posts found</p>
-            <Button variant="secondary" asChild>
-              <Link href="/">Back to Home</Link>
-            </Button>
+            <Link href="/" className={buttonVariants({ variant: 'secondary' })}>
+              Back to Home
+            </Link>
           </motion.div>
         )}
       </div>

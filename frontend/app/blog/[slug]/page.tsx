@@ -1,15 +1,16 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, use } from 'react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
+import { buttonVariants } from '@/components/ui/Button';
 import Link from 'next/link';
 import Image from 'next/image';
 import CommentsSection from '@/components/CommentsSection';
 import { Post } from '@/lib/api';
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +21,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${params.slug}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`, {
         method: 'GET',
       });
 
@@ -44,7 +45,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     } finally {
       setLoading(false);
     }
-  }, [params.slug]);
+  }, [slug]);
 
   useEffect(() => {
     fetchPost();
@@ -63,9 +64,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       <main className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-slate-900 mb-4">{error || 'Post not found'}</h1>
-          <Button asChild>
-            <Link href="/blog">Back to Blog</Link>
-          </Button>
+          <Link href="/blog" className={buttonVariants({ variant: 'primary' })}>
+            Back to Blog
+          </Link>
         </div>
       </main>
     );
@@ -181,9 +182,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
         {/* Back Button */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mt-8">
-          <Button variant="secondary" asChild>
-            <Link href="/blog">← Back to Blog</Link>
-          </Button>
+          <Link href="/blog" className={buttonVariants({ variant: 'secondary' })}>
+            ← Back to Blog
+          </Link>
         </motion.div>
       </article>
     </main>
