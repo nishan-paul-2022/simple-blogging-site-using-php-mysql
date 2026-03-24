@@ -133,6 +133,6 @@ The backend provides a comprehensive REST interface:
 ---
 
 <div align="center">
-  <img src="imgaes/company-logo.svg" alt="Author Logo" width="80" height="80" />
+  <img src="assets/company-logo.svg" alt="Author Logo" width="80" height="80" />
   <p>Built with ❤️ by <b><a href="https://kaiofficial.xyz/">KAI</a></b></p>
 </div>
