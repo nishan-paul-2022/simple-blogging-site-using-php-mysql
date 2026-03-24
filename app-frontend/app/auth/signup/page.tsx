@@ -17,7 +17,7 @@ export default function SignupPage() {
         <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-8">
           {/* Header */}
           <div className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Join Expresso</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Join Column</h1>
             <p className="text-gray-600">Create an account and start exploring</p>
           </div>
 

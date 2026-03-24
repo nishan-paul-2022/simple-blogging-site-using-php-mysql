@@ -36,7 +36,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-purple-600 to-emerald-600 flex items-center justify-center">
               <span className="text-white font-bold">📝</span>
             </div>
-            <span className="font-bold text-lg">Expresso Admin</span>
+            <span className="font-bold text-lg">Column Admin</span>
           </Link>
 
           <nav className="space-y-2">

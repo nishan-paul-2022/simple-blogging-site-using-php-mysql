@@ -18,7 +18,7 @@ export default function LoginPage() {
           {/* Header */}
           <div className="mb-8 text-center">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-            <p className="text-gray-600">Sign in to your Expresso account</p>
+            <p className="text-gray-600">Sign in to your Column account</p>
           </div>
 
           {/* Login Form */}
