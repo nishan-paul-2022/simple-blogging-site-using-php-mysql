@@ -1,6 +1,5 @@
 .PHONY: help setup start stop status frontend-lint frontend-format api-lint api-format api-check lint format all
 
-# Variables
 COMPOSE_CMD = docker compose
 FRONTEND_SVC = app-frontend
 BACKEND_SVC = app-backend
