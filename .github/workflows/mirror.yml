@@ -1,16 +1,28 @@
 name: Mirror to New Account
+
 on:
   push:
-    branches: "**"
+    branches:
+      - '**'
   delete:
+
 jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Source Repository
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-      - name: Mirror to nishan-paul-hello
+          fetch-depth: 0 # Fetches all history, branches, and tags
+
+      - name: Push to nishan-paul-hello Repository
         run: |
-          git remote add new-origin https://x-access-token:${{ secrets.MIRROR_PAT }}@github.com/nishan-paul-hello/${{ github.event.repository.name }}.git
-          git push new-origin --mirror
+          # 1. Add the destination remote with the Mirror PAT
+          # The token allows the runner to push to the new account repo
+          git remote add destination https://x-access-token:${{ secrets.MIRROR_PAT }}@github.com/nishan-paul-hello/${{ github.event.repository.name }}.git
+          
+          # 2. Mirror branches and tags correctly
+          # We push the 'remotes/origin' refs (from the source repo) to 'heads' (actual branches) on the destination
+          # --prune ensures that deleted branches in the source are also removed from the mirror
+          # --force is used to ensure the mirror always matches the source exactly
+          git push destination "refs/remotes/origin/*:refs/heads/*" --force --tags --prune
