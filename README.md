@@ -105,7 +105,6 @@ Manage your project efficiently using the provided `Makefile`:
 | :--- | :--- |
 | `make start` | Start all services in the background |
 | `make stop` | Stop all services |
-| `make status` | Check service health |
 | `make logs` | Stream logs from all containers |
 | `make lint` | Run frontend & backend linters |
 | `make format` | Auto-format frontend & backend code |
