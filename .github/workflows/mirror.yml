@@ -1,0 +1,16 @@
+name: Mirror to New Account
+on:
+  push:
+    branches: "**"
+  delete:
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Mirror to nishan-paul-hello
+        run: |
+          git remote add new-origin https://x-access-token:${{ secrets.MIRROR_PAT }}@github.com/nishan-paul-hello/${{ github.event.repository.name }}.git
+          git push new-origin --mirror
